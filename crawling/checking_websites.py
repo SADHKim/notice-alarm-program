@@ -4,25 +4,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 import mail
+import pickle
 
 drive = None
-prev_lists = {}
+prev_lists = None
 
-def make_driver():
-    # 드라이버 경로
-    path = '/usr/bin/geckodriver'
-
-    # 웹 드라이버 설정
-    options = webdriver.FirefoxOptions()
-    options.add_argument('--headless')  # 브라우저 백그라운드 실행
-    options.add_argument('--disable-blink-features=AutomationControlled')
-    global driver
-    driver = webdriver.Firefox(executable_path=path, options=options)
-    
-def return_driver():
-    global driver
-    driver.quit()
-    driver = None
 
 def get_posts(site):
     
@@ -76,3 +62,37 @@ def crawling(site):
         return ({'name' : site['name'], 'url' : site['url'], 'posts' : posts})
     else:
         return False
+
+
+
+
+
+def make_driver():
+    # 드라이버 경로
+    path = '/usr/bin/geckodriver'
+
+    # 웹 드라이버 설정
+    options = webdriver.FirefoxOptions()
+    options.add_argument('--headless')  # 브라우저 백그라운드 실행
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    global driver
+    driver = webdriver.Firefox(executable_path=path, options=options)
+    
+def return_driver():
+    global driver
+    driver.quit()
+    driver = None
+    
+    
+    
+    
+def get_prev_list():
+    with open('prev.pickle', "rb") as rf:
+        global prev_lists
+        prev_lists = pickle.load(rf)
+
+def store_prev_list():
+    with open('prev.pickle', 'wb') as wf:
+        global prev_lists
+        pickle.dump(prev_lists, wf)
+        prev_lists = None
