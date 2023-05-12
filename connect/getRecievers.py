@@ -10,6 +10,6 @@ def get_recievers(websiteName):
     url = 'http://notice-alarm.com/api/get/recievers?key=' + SECRET_KEY + '&website=' + websiteName
     response = requests.get(url=url)
     
-    recieversList = response.text
+    recievers = response.json()
     
-    return recieversList
+    return recievers['list']
