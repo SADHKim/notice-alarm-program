@@ -42,11 +42,9 @@ def get_posts(site):
                 ret.append(title)
             
         prev_lists[name] = tmp
-        driver.close()
         return ret
     except:
         mail.send_error_mail(site)
-        driver.close()
         return []
     
 
@@ -83,12 +81,12 @@ def return_driver():
     
     
 def get_prev_list():
-    with open('prev.pickle', "rb") as rf:
+    with open('/home/notice-alarm-program/prev.pickle', "rb") as rf:
         global prev_lists
         prev_lists = pickle.load(rf)
 
 def store_prev_list():
-    with open('prev.pickle', 'wb') as wf:
+    with open('/home/notice-alarm-program/prev.pickle', 'wb') as wf:
         global prev_lists
         pickle.dump(prev_lists, wf)
         prev_lists = None
