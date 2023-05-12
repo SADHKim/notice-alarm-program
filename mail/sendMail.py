@@ -3,6 +3,7 @@
 
 import smtplib
 from email.mime.text import MIMEText
+
 from conf import MAIL_ID, MAIL_PWD
 
 ### the function sends mail with class object, recievers as params ###
