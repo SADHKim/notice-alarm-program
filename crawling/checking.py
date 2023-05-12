@@ -1,12 +1,12 @@
 from .checking_websites import crawling, make_driver, return_driver
 import mail
-import http
+import connect
 
 
 def checking():
     result = []
     
-    sites = http.get_websites()
+    sites = connect.get_websites()
     make_driver()
     mail.send_start_mail(len(sites))
     

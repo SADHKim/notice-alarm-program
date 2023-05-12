@@ -3,7 +3,7 @@ import time
 
 import mail
 import crawling
-import http
+import connect
 
 
 def search_pages():
@@ -16,7 +16,7 @@ def search_pages():
                 continue
             
             # 해당 웹사이트에서 알림을 받는 사람들 추출#
-            recievers = http.get_recievers(result['name'])
+            recievers = connect.get_recievers(result['name'])
             # recievers가 없다면 continue #
             if recievers is False:
                 continue
