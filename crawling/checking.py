@@ -8,9 +8,8 @@ def checking():
     
     sites = connect.get_websites()
     make_driver()
-    mail.send_start_mail(len(sites))
-    
     get_prev_list()
+    mail.send_start_mail(len(sites))
     
     for site in sites:
         result.append(crawling(site))
