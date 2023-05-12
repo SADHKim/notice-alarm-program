@@ -57,12 +57,14 @@ def get_posts(site):
             
         prev_lists[name] = tmp
         print('not errer at', site['name'])
+        driver.close()
         return ret
     except:
         print('!!!!! errer at', site['name'], '!!!!!')
         mail.send_error_mail(site)
         print('!!!!! sending mail completed !!!!!')
         
+        driver.close()
         return []
     
 

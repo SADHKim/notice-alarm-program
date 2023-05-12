@@ -9,6 +9,7 @@ def checking():
     sites = connect.get_websites()
     make_driver()
     mail.send_start_mail(len(sites))
+    print('!!! crawling start !!!')
     
     for site in sites:
         result.append(crawling(site))
