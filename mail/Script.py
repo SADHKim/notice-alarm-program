@@ -5,17 +5,50 @@ class Script:
     content = "" # html type #
     link = ""
         
-    def make_script(self, posts, link):
+    def make_script(self, posts, link, website):
+        
+        self.conent = '''
+        <head>
+        <style>
+        button{
+            border-style: none;
+            background-color: rgba(145, 143, 222, 0.648);
+            border-radius: 28px;
+            
+            margin-left: 10%;
+        }
+        h1, h2{
+            color: blue;
+        }
+        a{
+            text-decoration: none;
+            color: rgba(42, 40, 40, 0.58);
+            font-size: large;
+        }
+        </style>
+        </head>
+        <body>
+        <img src="http://notice-alarm.com/static/image/logo.png" alt="notice-alarm logo">
+        <br>
+        <h1>{name}</h1>'''
+        
         for post in posts:
-            self.content += post + '가 등록되었습니다.\n'
+            self.content += "<h2>%s</h2>" % post
+
+        self.content += '''
+        <p style="font-size: larger">
+        ✅ 새로운 공지가 추가되었어요!<br>
+        <br>
+        ✅ 사용자님이 원하시는 내용이라면, 아래 버튼을 눌러 공지사항을 확인해보세요!<br>
+        </p>
+        <br>
+        <button><a href="{url}" target="_blank">📢 바로가기 📢</a></button>
+        </body>
+        '''
+        self.content.format(name = website, url = link)
         
-        self.content = self.content.replace("\n", "<br>")
         
-        self.link = link
-    
-    def make_title(self, posts, websiteName):
-        self.subject = '[' + websiteName + ']' + ' '
-        
+        self.subject = '[' + website + ']' + ' '
         if len(posts) == 1:
             self.subject += posts[0]
         else:

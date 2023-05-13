@@ -23,8 +23,7 @@ def search_pages():
             
             # Notice object 생성, 내용 만들기 #
             script = mail.Script()
-            script.make_script(result['posts'], result['url'])
-            script.make_title(result['posts'], result['name'])
+            script.make_script(result['posts'], result['url'], result['name'])
             
             # 메일 전송 #
             mail.send_mail(script, recievers)
