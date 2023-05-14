@@ -7,7 +7,7 @@ class Script:
         
     def make_script(self, posts, link, website):
         
-        self.conent = '''
+        self.content = '''
         <head>
         <style>
         button{
@@ -30,10 +30,10 @@ class Script:
         <body>
         <img src="http://notice-alarm.com/static/image/logo.png" alt="notice-alarm logo">
         <br>
-        <h1>{name}</h1>'''
+        <h1>''' + website + "</h1>\n"
         
         for post in posts:
-            self.content += "<h2>%s</h2>" % post
+            self.content += "<h2>%s</h2>\n" % post
 
         self.content += '''
         <p style="font-size: larger">
@@ -42,10 +42,9 @@ class Script:
         ✅ 사용자님이 원하시는 내용이라면, 아래 버튼을 눌러 공지사항을 확인해보세요!<br>
         </p>
         <br>
-        <button><a href="{url}" target="_blank">📢 바로가기 📢</a></button>
+        <button><a href="''' + link + '''" target="_blank">📢 바로가기 📢</a></button>
         </body>
         '''
-        self.content.format(name = website, url = link)
         
         
         self.subject = '[' + website + ']' + ' '
