@@ -18,7 +18,7 @@ class Script:
             margin-left: 10%;
         }
         h1, h2{
-            color: blue;
+            color: black;
         }
         a{
             text-decoration: none;
@@ -30,13 +30,13 @@ class Script:
         <body>
         <img src="http://notice-alarm.com/static/image/logo.png" alt="notice-alarm logo">
         <br>
-        <h1>''' + website + "</h1>\n"
+        <h2>''' + website + "</h2>\n"
         
         for post in posts:
             self.content += "<h2>%s</h2>\n" % post
 
         self.content += '''
-        <p style="font-size: larger">
+        <p style="font-size: larger;">
         ✅ 새로운 공지가 추가되었어요!<br>
         <br>
         ✅ 사용자님이 원하시는 내용이라면, 아래 버튼을 눌러 공지사항을 확인해보세요!<br>
