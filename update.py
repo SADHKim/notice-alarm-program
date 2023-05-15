@@ -6,15 +6,19 @@ from selenium.webdriver.support import expected_conditions as EC
 import connect
 import pickle
 
-posts_list = {}
+prev = None
 driver = None
 
-def update_pickle():
+def add_pickle(url):
     make_driver()
-    global posts_list
+    get_prev()
+    global prev
     
     websites = connect.get_websites()
     for website in websites:
+        if website['url'] != url:
+            continue
+        
         driver.get(website['url'])
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, website['class'])))
         
@@ -24,12 +28,18 @@ def update_pickle():
         for post in posts:
             tmp.append(post)
             
-        posts_list[website['name']] = tmp
+        prev[website['name']] = tmp
         
     save_list()
+    
+def pop_pickle(name):
+    get_prev()
+    global prev
+    
+    prev.pop(name)
+    
+    save_list()
         
-
-
 def make_driver():
     # path of firefox
     path = '/usr/bin/geckodriver'
@@ -41,10 +51,24 @@ def make_driver():
     global driver
     driver = webdriver.Firefox(executable_path=path, options=options)
     
+def get_prev():
+    with open('/home/notice-alarm-program/crawling/prev.pickle', "rb") as rf:
+        global prev
+        prev = pickle.load(rf)
+    
 def save_list():
     with open('/home/notice-alarm-program/crawling/prev.pickle', 'wb') as wf:
-        global posts_list
-        pickle.dump(posts_list, wf)
+        global prev
+        pickle.dump(prev, wf)
+        prev = None
         
 if __name__ == '__main__':
-    update_pickle()
+    divide = input('What will you exec? (pop, add) : ')
+    if divide == 'add':
+        url = input('input url : ')
+        add_pickle(url)
+        print('done')
+    elif divide == 'pop':
+        name = input('input name : ')
+        pop_pickle(name)
+        print('done')
