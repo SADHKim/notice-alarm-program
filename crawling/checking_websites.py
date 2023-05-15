@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.firefox.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
 
 import mail
 import pickle
@@ -62,15 +64,13 @@ def crawling(site):
 
 
 def make_driver():
-    # 드라이버 경로
-    path = '/usr/bin/geckodriver'
 
     # 웹 드라이버 설정
     options = webdriver.FirefoxOptions()
     options.add_argument('--headless')  # 브라우저 백그라운드 실행
     options.add_argument('--disable-blink-features=AutomationControlled')
     global driver
-    driver = webdriver.Firefox(executable_path=path, options=options)
+    driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=options)
     
 def return_driver():
     global driver
