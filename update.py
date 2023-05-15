@@ -51,7 +51,7 @@ def make_driver():
     options.add_argument('--headless')  # in background
     options.add_argument('--disable-blink-features=AutomationControlled')
     global driver
-    driver = webdriver.Firefox(service=GeckoDriverManager().install(), options=options)
+    driver = webdriver.Firefox(executable_path=path, options=options)
     
 def get_prev():
     with open('/home/notice-alarm-program/crawling/prev.pickle', "rb") as rf:
