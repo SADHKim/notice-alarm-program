@@ -18,7 +18,7 @@ def add_pickle(url):
     
     websites = connect.get_websites()
     for website in websites:
-        if website['url'] != url:
+        if website['url'] != url and url != 'all':
             continue
         
         driver.get(website['url'])
@@ -44,13 +44,12 @@ def pop_pickle(name):
     save_list()
         
 def make_driver():
-    # path of firefox
-    path = '/usr/bin/geckodriver'
 
     # driver options
     options = webdriver.FirefoxOptions()
     options.add_argument('--headless')  # in background
     options.add_argument('--disable-blink-features=AutomationControlled')
+    
     global driver
     driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=options)
     
