@@ -61,6 +61,7 @@ def get_prev():
 def save_list():
     with open('/home/notice-alarm-program/crawling/prev.pickle', 'wb') as wf:
         global prev
+        print(prev)
         pickle.dump(prev, wf)
         prev = None
         
