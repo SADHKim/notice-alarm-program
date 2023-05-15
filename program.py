@@ -32,8 +32,6 @@ def search_pages():
         
         
 def start():
-    search_pages()
-    
     schedule.every().day.at('09:00').do(search_pages)
     schedule.every().day.at('15:00').do(search_pages)
     schedule.every().day.at('21:00').do(search_pages)
