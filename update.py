@@ -28,7 +28,8 @@ def add_pickle(url):
         
         tmp = []
         for post in posts:
-            tmp.append(post)
+            title = post.get_attribute('innerText').strip()
+            tmp.append(title)
             
         prev[website['name']] = tmp
     
