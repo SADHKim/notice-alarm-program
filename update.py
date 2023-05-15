@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.firefox import GeckoDriverManager
-from webdriver_manager.firefox.service import Service
 
 import connect
 import pickle
@@ -52,7 +51,7 @@ def make_driver():
     options.add_argument('--headless')  # in background
     options.add_argument('--disable-blink-features=AutomationControlled')
     global driver
-    driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), executable_path=path, options=options)
+    driver = webdriver.Firefox(service=GeckoDriverManager().install(), executable_path=path, options=options)
     
 def get_prev():
     with open('/home/notice-alarm-program/crawling/prev.pickle', "rb") as rf:
